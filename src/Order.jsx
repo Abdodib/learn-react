@@ -1,9 +1,11 @@
 import Pizza from "./pizza";
+import Cart from "./Cart";
 import { useState , useEffect} from "react";
 function Order(){
    
 
   const [pizzaTypes, setPizzaTypes] = useState([]);
+  const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [pizzaType, setPizzaType] = useState("pepperoni");
   const [pizzaSize, setPizzaSize] = useState("medium");
@@ -33,7 +35,11 @@ async function fetchPizzaTypes() {
     return (
 <div className="order">
       <h2>Create Order</h2>
-      <form>
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        setCart ([...Cart, {id: pizzaType, size: pizzaSize, price}]);
+
+      }}>
         <div>
           <div>
             <label htmlFor="pizza-type">Pizza Type</label>
@@ -107,6 +113,9 @@ async function fetchPizzaTypes() {
     )
   }
       </form>
+      {
+        loading ? <h2>loading....</h2> : <Cart cart = {cart} />
+      }
     </div>
     );
 }
