@@ -35,11 +35,12 @@ async function fetchPizzaTypes() {
     return (
 <div className="order">
       <h2>Create Order</h2>
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        setCart ([...Cart, {id: pizzaType, size: pizzaSize, price}]);
-
-      }}>
+      <form
+  onSubmit={(e) => {
+    e.preventDefault();
+    setCart([...cart, { pizza: selectedPizza, size: pizzaSize, price }]);
+  }}
+>
         <div>
           <div>
             <label htmlFor="pizza-type">Pizza Type</label>
